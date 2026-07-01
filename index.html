@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leonardo Tiozzo — Em formação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1310;
+    --bg-panel: #161B17;
+    --line: #2A322C;
+    --text: #E9ECE7;
+    --text-dim: #9AA69C;
+    --accent: #7CE38B;
+    --accent-dim: #4B7A55;
+    --amber: #E3B25C;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+      from { transform: translateY(10px); }
+    }
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HEADER TERMINAL ---------- */
+  .terminal {
+    margin-top: 48px;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5);
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #1B211C;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.red { background: #E37C7C; }
+  .dot.yellow { background: var(--amber); }
+  .dot.green { background: var(--accent); }
+
+  .terminal-title {
+    margin-left: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .terminal-body {
+    padding: 28px 24px 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+  }
+
+  .prompt-line { color: var(--text-dim); margin-bottom: 4px; }
+  .prompt-line .prompt-sym { color: var(--accent); }
+  .prompt-line .cmd { color: var(--text); }
+
+  .commit-hash { color: var(--amber); }
+
+  .terminal-output {
+    margin: 14px 0 22px;
+    padding-left: 4px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .status-line {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  .status-line .branch { color: var(--amber); }
+
+  /* ---------- SECTIONS ---------- */
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  section:last-of-type { border-bottom: none; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  .eyebrow::before { content: "// "; color: var(--text-dim); }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+
+  p { color: var(--text-dim); max-width: 560px; }
+
+  /* stack / skills */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .stack-item {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .stack-item:hover {
+    border-color: var(--accent-dim);
+    transform: translateY(-2px);
+  }
+
+  .stack-item .level {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .stack-item.learning .level { background: var(--amber); }
+
+  /* how I work */
+  .work-list { margin-top: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .work-item { display: flex; gap: 14px; align-items: baseline; }
+  .work-item .idx {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--accent-dim);
+    font-size: 13px;
+    width: 24px;
+    flex-shrink: 0;
+  }
+  .work-item p { margin: 0; color: var(--text); font-size: 15px; }
+  .work-item span { color: var(--text-dim); }
+
+  /* contact */
+  .contact-grid {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .contact-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 18px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .contact-btn:hover {
+    border-color: var(--accent);
+    background: #1B211C;
+  }
+
+  .contact-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .contact-btn .arrow { color: var(--accent); }
+
+  footer {
+    padding: 32px 0 48px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  footer .heart { color: var(--amber); }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 26px; }
+    .terminal-body { font-size: 13px; padding: 22px 18px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="terminal fade-in">
+    <div class="terminal-bar">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <div class="terminal-title">leonardo@portfolio ~ main</div>
+    </div>
+    <div class="terminal-body">
+      <div class="prompt-line"><span class="prompt-sym">$</span> <span class="cmd">git log --oneline -1</span></div>
+      <div class="terminal-output"><span class="commit-hash">a3f9c2e</span> — início da jornada em tecnologia</div>
+
+      <h1>Leonardo Tiozzo</h1>
+      <div class="role">Desenvolvedor &amp; Empreendedor Digital</div>
+
+      <div class="status-line">
+        Branch atual: <span class="branch">aprendendo</span> · construindo projetos e evoluindo a cada commit
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="eyebrow">sobre</div>
+    <h2>Começando com intenção</h2>
+    <p>
+      Desenvolvedor e empreendedor digital, fundador da SPNAOEMORANGO, onde combino
+      código, marca e estratégia de crescimento para construir produtos digitais
+      do zero — do desenvolvimento ao lançamento.
+    </p>
+  </section>
+
+  <section>
+    <div class="eyebrow">projeto</div>
+    <h2>SPNAOEMORANGO</h2>
+    <p>
+      Marca e ecossistema de produtos digitais focados em transformar disciplina
+      e atitude em ferramentas práticas de progresso pessoal. Atualmente desenvolvo
+      o <strong style="color: var(--text);">Começar Meu Dia</strong>, um checklist
+      inteligente para organizar a rotina — projeto ativo, com atualizações constantes.
+    </p>
+  </section>
+
+  <section>
+    <div class="eyebrow">stack</div>
+    <h2>Tecnologias</h2>
+    <div class="stack-grid">
+      <div class="stack-item"><span class="level"></span>HTML5</div>
+      <div class="stack-item"><span class="level"></span>CSS3</div>
+      <div class="stack-item learning"><span class="level"></span>JavaScript</div>
+      <div class="stack-item"><span class="level"></span>Android</div>
+      <div class="stack-item"><span class="level"></span>Git &amp; GitHub</div>
+      <div class="stack-item"><span class="level"></span>Marketing Digital</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">metodo</div>
+    <h2>Como eu trabalho</h2>
+    <div class="work-list">
+      <div class="work-item">
+        <span class="idx">01</span>
+        <p>Estudo o conceito antes de escrever qualquer código. <span>Sem copiar sem entender.</span></p>
+      </div>
+      <div class="work-item">
+        <span class="idx">02</span>
+        <p>Uso Claude como apoio para revisar código e organizar ideias. <span>Ferramenta, não substituto do raciocínio.</span></p>
+      </div>
+      <div class="work-item">
+        <span class="idx">03</span>
+        <p>Documento e versiono cada projeto no Git. <span>Processo importa tanto quanto resultado.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">contato</div>
+    <h2>Vamos conversar</h2>
+    <div class="contact-grid">
+      <a class="contact-btn" href="https://www.linkedin.com/in/leonardo-tiozzo-bb7884217" target="_blank" rel="noopener">
+        LinkedIn <span class="arrow">→</span>
+      </a>
+      <a class="contact-btn" href="mailto:leonardo.tiozzo@icloud.com">
+        Email <span class="arrow">→</span>
+      </a>
+      <a class="contact-btn" href="https://github.com/leon4rdoT1ozzO" target="_blank" rel="noopener">
+        GitHub <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    feito com <span class="heart">♥</span> e alguns commits · 2026
+  </footer>
+
+</div>
+
+</body>
+</html>
