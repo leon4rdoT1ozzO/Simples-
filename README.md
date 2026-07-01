@@ -13,3 +13,6 @@ minhas competências técnicas e o projeto SPNAOEMORANGO.
 ## 🤖 Processo de desenvolvimento
 Este projeto contou com apoio do Claude (Anthropic) para revisão de código
 e definição da identidade visual.
+
+## 🔗 Ver o site publicado
+https://leon4rdot1ozzo.github.io/Simples-/
